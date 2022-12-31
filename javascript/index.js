@@ -21,6 +21,39 @@ function updateTime() {
       "h:mm:ss [<small>]A[</small>]"
     );
   }
+  let sydneyElement = document.querySelector("#sydney");
+  if (sydneyElement) {
+    let sydneyDateElement = sydneyElement.querySelector(".date");
+    let sydneyTimeElement = sydneyElement.querySelector(".time");
+    let sydneyTime = moment().tz("Australia/sydney");
+
+    sydneyDateElement.innerHTML = sydneyTime.format("Do MMMM YYYY");
+    sydneyTimeElement.innerHTML = sydneyTime.format(
+      "h:mm:ss [<small>]A[</small>]"
+    );
+  }
+  let moscowElement = document.querySelector("#moscow");
+  if (moscowElement) {
+    let moscowDateElement = moscowElement.querySelector(".date");
+    let moscowTimeElement = moscowElement.querySelector(".time");
+    let moscowTime = moment().tz("Europe/moscow");
+
+    moscowDateElement.innerHTML = moscowTime.format("Do MMMM YYYY");
+    moscowTimeElement.innerHTML = moscowTime.format(
+      "h:mm:ss [<small>]A[</small>]"
+    );
+  }
+  let newYorkElement = document.querySelector("#new-york");
+  if (newYorkElement) {
+    let newYorkDateElement = newYorkElement.querySelector(".date");
+    let newYorkTimeElement = newYorkElement.querySelector(".time");
+    let newYorkTime = moment().tz("America/New_York");
+
+    newYorkDateElement.innerHTML = newYorkTime.format("Do MMMM YYYY");
+    newYorkTimeElement.innerHTML = newYorkTime.format(
+      "h:mm:ss [<small>]A[</small>]"
+    );
+  }
 }
 
 function updateCity(event) {
@@ -28,18 +61,20 @@ function updateCity(event) {
   if (cityTimezone === "current") {
     cityTimezone = moment.tz.guess();
   }
+  let cityName = cityTimezone.replace("-", " ").split("/")[1];
   let cityTime = moment().tz(cityTimezone);
   let citiesElement = document.querySelector("#cities");
   citiesElement.innerHTML = `
   <div class="city">
   <div>
-            <h2> ${cityTimezone}</h2>
+            <h2> ${cityName}</h2>
             <div class="date">${cityTime.format("Do MMMM YYYY")}</div>
           </div>
             <div class="time">${cityTime.format(
               "h:mm:ss"
             )}<small>${cityTime.format("A")}</small></div>
         </div>
+        <a href="/">All cities</a>
   `;
 }
 
